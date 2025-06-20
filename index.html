@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHS INFO TECH & D-MARKETING</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: antiquewhite;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .logo img {
+            height: 40px;
+            width: 40px;
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle .bar {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: all 0.3s ease;
+        }
+
+        #nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        #nav-links li a {
+            padding: 0.5rem 1rem;
+            transition: color 0.3s;
+        }
+
+        #nav-links li a:hover {
+            color: #007bff;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 6rem 0 2rem;
+        }
+
+        .hero-logo {
+            height: 150px;
+            width: 150px;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+            margin: 1.5rem auto;
+            max-width: 800px;
+        }
+
+        /* Sections */
+        .section {
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 1rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Clients Section */
+        .clients {
+            background: rgb(244, 238, 238);
+            padding: 3rem 0;
+        }
+
+        .client-item {
+            margin-bottom: 2rem;
+        }
+
+        .client-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 3rem 0;
+        }
+
+        .contact-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-box {
+            background: #28a745;
+            padding: 15px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .icon-box i {
+            color: white;
+            font-size: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: #00274d;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        /* Scroll to Top Button */
+        #scrollTopBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 999;
+        }
+
+        #scrollTopBtn.visible {
+            opacity: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            #nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+            }
+
+            #nav-links.show {
+                transform: translateY(0);
+            }
+
+            .menu-toggle.active .bar:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .menu-toggle.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active .bar:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .hero {
+                padding: 5rem 0 1rem;
+            }
+
+            .hero-logo {
+                height: 120px;
+                width: 120px;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero-text {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
+            .section h2 {
+                font-size: 1.5rem;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo span {
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 1.3rem;
+            }
+
+            .feature-card {
+                padding: 1rem;
+            }
+
+            .feature-icon {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="LOGO.WEBP" alt="SHS Logo">
+            <span>SHS INFO TECH & D-MARKETING</span>
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <ul id="nav-links">
+            <li><a href="#what-we-do">Services</a></li>
+            <li><a href="#partner-brands">Clients</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <img src="LOGO.WEBP" alt="SHS Logo" class="hero-logo">
+            <h1>🌐 SHS Info Tech and D Marketing</h1>
+            <hr>
+            <p class="hero-text">We Help Businesses Grow Online. At SHS Info Tech and D Marketing, we work with all types of businesses to help them reach more people online. We use smart and creative ideas to make sure your brand stands out on the internet.</p>
+        </section>
+
+        <!-- What We Do Section -->
+        <section id="what-we-do" class="section">
+            <h2>💼 WHAT WE DO</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📲</div>
+                    <h3>INFLUENCER MARKETING</h3>
+                    <p>We work with social media influencers to promote your business</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>DIGITAL MARKETING</h3>
+                    <p>We plan and manage your online marketing</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✉️</div>
+                    <h3>EMAIL MARKETING</h3>
+                    <p>We send emails to your customers to keep them updated</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>WHATSAPP MARKETING</h3>
+                    <p>We help you reach customers directly through WhatsApp</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>PAID ADS</h3>
+                    <p>We run ads on Google, Facebook, and Instagram to reach more people</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💻</div>
+                    <h3>WEBSITE DEVELOPMENT</h3>
+                    <p>We create modern and easy-to-use websites</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Packages Section -->
+        <section class="section">
+            <h2>💰 OUR PACKAGES</h2>
+            <div class="features-grid" style="max-width: 500px; margin: 0 auto;">
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Starting at just ₹5,000</h3><br>
+                    <pre><font size=3.5 face="ariel">We offer powerful and affordable packages to
+ boost your brand online:
+
+💼 Combo 1 – ₹15,000
+🎥 2 Reels on Instagram, YouTube & all 
+major platforms
+
+💼 Combo 2 – ₹10,000
+👨‍💼👩‍💼 1 Male + 1 Female Influencer
+📺 2 Channels | 🎬 2 Reels | 🌐 All Platforms
+
+✨ All packages can be customized to fit
+ your needs and budget perfectly!</font></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Clients Section -->
+        <section id="partner-brands" class="section clients">
+            <h2>🏆 Our Clients</h2>
+            <div class="client-item">
+                <h3>✅ Ruby Notebook, Karur</h3>
+                <p>👉 Got 22.3K views on social media</p>
+                <a href="https://www.instagram.com/rubynotebooks?igsh=NWkxMWR3cGc1ODln">click here</a>
+            </div>
+            <div class="client-item">
+                <h3>✅ Mr. Bro Luxury salon, Madurai</h3>
+                <p>👉 Got 50.6K views on social media</p>
+                <a href="https://www.instagram.com/reel/DJNka6HzuRZ/?igsh=MTE1b2hxcHJ4Ym4wag==">click here</a>
+            </div>
+            <div class="client-item">
+                <h3>✅ Other Local Shops</h3>
+                <p>👉 Reached more people and increased sales</p>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section">
+            <h2>🚀 Let's Grow Your Business Together</h2>
+            <div class="features-grid" style="max-width: 500px; margin: 0 auto;">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Grow your business</h3>
+                    <p>If you want more people to know about your business, we're here to help. We use the latest tools and ideas to make sure your brand gets noticed online.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section contact">
+            <h2>GET IN TOUCH WITH US</h2>
+            <div class="contact-box">
+                <div class="contact-item">
+                    <div class="icon-box">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>ADDRESS</h3>
+                    <p>MADURAI</p>
+                </div>
+                <div class="contact-item">
+                    <div class="icon-box">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>PHONE</h3>
+                    <a href="tel:+919092871613">9092871613</a>
+                </div>
+                <div class="contact-item">
+                    <div class="icon-box">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>EMAIL</h3>
+                    <a href="mailto:s.h.sdigitalmarketing2716@gmail.com">s.h.sdigitalmarketing2716@gmail.com</a>
+                </div>
+
+                <div class="contact-item">
+                    <div class="icon-box">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <h3>Instagram</h3>
+                    <a href="https://www.instagram.com/digital_marketing_shs?igsh=MThycnloamQ2cGg1eA==">digital_marketing_shs</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Let's make your brand successful!</p>
+    </footer>
+
+    <button id="scrollTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById("nav-links");
+            const menuToggle = document.querySelector(".menu-toggle");
+            
+            navLinks.classList.toggle("show");
+            menuToggle.classList.toggle("active");
+        }
+
+        // Scroll to Top Button
+        const scrollTopBtn = document.getElementById("scrollTopBtn");
+        
+        window.addEventListener("scroll", () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add("visible");
+            } else {
+                scrollTopBtn.classList.remove("visible");
+            }
+        });
+
+        scrollTopBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener("click", function(e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute("href"));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: "smooth"
+                    });
+                    
+                    // Close mobile menu if open
+                    const navLinks = document.getElementById("nav-links");
+                    const menuToggle = document.querySelector(".menu-toggle");
+                    if (navLinks.classList.contains("show")) {
+                        navLinks.classList.remove("show");
+                        menuToggle.classList.remove("active");
+                    }
+                }
+            });
+        });
+
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll(".feature-card, .client-item, .contact-item");
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            elements.forEach(el => {
+                el.style.opacity = "0";
+                el.style.transform = "translateY(20px)";
+                el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+                observer.observe(el);
+            });
+        };
+
+        // Initialize animations when page loads
+        window.addEventListener("DOMContentLoaded", animateOnScroll);
+    </script>
+</body>
+
+</html>
